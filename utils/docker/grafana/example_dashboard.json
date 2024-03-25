@@ -34,7 +34,7 @@
       "targetBlank": true,
       "title": "Kibana-Prometheus Exporter",
       "type": "link",
-      "url": "https://github.com/pjhampton/kibana-prometheus-exporter"
+      "url": "https://github.com/qualifio/kibana-prometheus-exporter"
     }
   ],
   "panels": [

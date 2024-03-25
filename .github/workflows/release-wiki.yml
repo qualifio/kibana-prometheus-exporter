@@ -21,27 +21,25 @@ jobs:
       - name: Check out Kibana Prometheus Exporter
         uses: actions/checkout@v2
         with:
-          repository: "pjhampton/kibana-prometheus-exporter"
-          ref: main
           path: "kibana-prometheus-exporter"
 
       - name: Check out Kibana Prometheus Exporter Wiki
         uses: actions/checkout@v2
         with:
-          repository: "pjhampton/kibana-prometheus-exporter.wiki"
+          repository: "qualifio/kibana-prometheus-exporter.wiki"
           ref: master
           path: "kibana-prometheus-exporter.wiki"
 
       - name: Configure Git
         run: |
           git config --global --add safe.directory /kibana-prometheus-exporter.wiki
-          git config --global user.email "pjhampton@users.noreply.github.com"
-          git config --global user.name "pjhampton"
+          git config --global user.email "qualifio@users.noreply.github.com"
+          git config --global user.name "qualifio"
 
       - name: Clean wiki
         working-directory: kibana-prometheus-exporter.wiki
         run: rm -rf ./*
-  
+
       - name: Copy wiki files
         run: cp -a kibana-prometheus-exporter/wiki kibana-prometheus-exporter.wiki
 

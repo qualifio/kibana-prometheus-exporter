@@ -8,5 +8,5 @@ FROM kibana:${STACK_VERSION}
 ARG STACK_VERSION
 
 # Installs Prometheus Exporter plugin
-# https://github.com/pjhampton/kibana-prometheus-exporter
-RUN bin/kibana-plugin install https://github.com/pjhampton/kibana-prometheus-exporter/releases/download/${STACK_VERSION}/prometheus_exporter-${STACK_VERSION}.zip
+# https://github.com/qualifio/kibana-prometheus-exporter
+RUN bin/kibana-plugin install https://github.com/qualifio/kibana-prometheus-exporter/releases/download/${STACK_VERSION}/prometheus_exporter-${STACK_VERSION}.zip

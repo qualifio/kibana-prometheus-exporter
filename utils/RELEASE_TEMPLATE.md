@@ -1,5 +1,5 @@
 To install run:
 
 ```
-bin/kibana-plugin install https://github.com/pjhampton/kibana-prometheus-exporter/releases/download/VERSION/kibanaPrometheusExporter-VERSION.zip
+bin/kibana-plugin install https://github.com/qualifio/kibana-prometheus-exporter/releases/download/VERSION/kibanaPrometheusExporter-VERSION.zip
 ```
