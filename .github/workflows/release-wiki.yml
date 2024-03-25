@@ -21,8 +21,6 @@ jobs:
       - name: Check out Kibana Prometheus Exporter
         uses: actions/checkout@v2
         with:
-          repository: "qualifio/kibana-prometheus-exporter"
-          ref: main
           path: "kibana-prometheus-exporter"
 
       - name: Check out Kibana Prometheus Exporter Wiki
