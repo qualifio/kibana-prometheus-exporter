@@ -1,6 +1,8 @@
 name: "Test & Coverage"
 
-on: [push, pull_request]
+on:
+  pull_request:
+    branches: [ main ]
 
 jobs:
   test_and_coverage:
@@ -12,12 +14,12 @@ jobs:
       fail-fast: false
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         repository: elastic/kibana
         ref: refs/heads/main
 
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         path: 'plugins/kibana-prometheus-exporter'
 
@@ -28,10 +30,14 @@ jobs:
       run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
       id: nvm
 
-    - name: Use Node.js (.nvmrc)
-      uses: actions/setup-node@v1
+    - name: Detect Node version
+      run: echo "NODE_VERSION=$(cat .nvmrc)" >> $GITHUB_OUTPUT
+      id: nvmrc
+
+    - name: Use Node.js ${{ steps.nvmrc.outputs.NODE_VERSION }}
+      uses: actions/setup-node@v4
       with:
-        node-version: "${{ steps.nvm.outputs.NVMRC }}"
+        node-version: '${{ steps.nvmrc.outputs.NODE_VERSION }}'
 
     - name: Set up Kibana development environment
       run: yarn kbn bootstrap

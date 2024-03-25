@@ -12,33 +12,33 @@ jobs:
       fail-fast: false
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         repository: elastic/kibana
         ref: refs/heads/main
 
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         path: 'plugins/kibana-prometheus-exporter'
 
     - name: Install workflow dependencies
       run: sudo apt-get install -y jq
 
-    - name: Read .nvmrc
-      run: echo "##[set-output name=NVMRC;]$(cat .nvmrc)"
-      id: nvm
+    - name: Detect Node version
+      run: echo "NODE_VERSION=$(cat .nvmrc)" >> $GITHUB_OUTPUT
+      id: nvmrc
 
-    - name: Use Node.js (.nvmrc)
-      uses: actions/setup-node@v1
+    - name: Use Node.js ${{ steps.nvmrc.outputs.NODE_VERSION }}
+      uses: actions/setup-node@v4
       with:
-        node-version: "${{ steps.nvm.outputs.NVMRC }}"
+        node-version: '${{ steps.nvmrc.outputs.NODE_VERSION }}'
 
     - name: Set up Kibana Development Environment
       run: yarn kbn bootstrap
 
     - name: Build plugin
       working-directory: plugins/kibana-prometheus-exporter
-      run: echo "8.12.0" | yarn build
+      run: echo "${{ github.ref }}" | yarn build
 
     - name: Create checksum manifest
       working-directory: plugins/kibana-prometheus-exporter/build
@@ -53,35 +53,11 @@ jobs:
       run: ls -la && cat RELEASE_TEMPLATE.md
 
     - name: Create release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v2
       with:
-        tag_name: 8.12.0
-        release_name: 8.12.0
         body_path: plugins/kibana-prometheus-exporter/build/RELEASE_TEMPLATE.md
-        draft: true
         prerelease: false
-
-    - name: Upload release artifact (Kibana Plugin)
-      id: upload-release-asset-plugin
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: plugins/kibana-prometheus-exporter/build/kibanaPrometheusExporter-8.12.0.zip
-        asset_name: kibanaPrometheusExporter-8.12.0.zip
-        asset_content_type: application/zip
-
-    - name: Upload release artifact (Checksum manifest)
-      id: upload-release-asset-checksum-manifest
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: plugins/kibana-prometheus-exporter/build/checksum.json
-        asset_name: checksum.json
-        asset_content_type: application/json
+        draft: true
+        files: |
+          plugins/kibana-prometheus-exporter/build/checksum.json
+          plugins/kibana-prometheus-exporter/build/kibanaPrometheusExporter-${{ github.ref }}.zip
