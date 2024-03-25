@@ -1,6 +1,8 @@
 name: "Test & Coverage"
 
-on: [push, pull_request]
+on:
+  pull_request:
+    branches: [ main ]
 
 jobs:
   test_and_coverage:
