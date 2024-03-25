@@ -19,12 +19,12 @@ jobs:
 
     steps:
       - name: Check out Kibana Prometheus Exporter
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           path: "kibana-prometheus-exporter"
 
       - name: Check out Kibana Prometheus Exporter Wiki
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: "qualifio/kibana-prometheus-exporter.wiki"
           ref: master

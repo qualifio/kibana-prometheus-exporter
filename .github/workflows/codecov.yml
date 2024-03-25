@@ -14,12 +14,12 @@ jobs:
       fail-fast: false
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         repository: elastic/kibana
         ref: refs/heads/main
 
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         path: 'plugins/kibana-prometheus-exporter'
 
