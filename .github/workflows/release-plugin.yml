@@ -38,7 +38,7 @@ jobs:
 
     - name: Build plugin
       working-directory: plugins/kibana-prometheus-exporter
-      run: echo "${{ github.ref }}" | yarn build
+      run: echo "${{ github.ref_name }}" | yarn build
 
     - name: Create checksum manifest
       working-directory: plugins/kibana-prometheus-exporter/build
@@ -60,4 +60,4 @@ jobs:
         draft: true
         files: |
           plugins/kibana-prometheus-exporter/build/checksum.json
-          plugins/kibana-prometheus-exporter/build/kibanaPrometheusExporter-${{ github.ref }}.zip
+          plugins/kibana-prometheus-exporter/build/kibanaPrometheusExporter-${{ github.ref_name }}.zip
