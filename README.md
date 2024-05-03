@@ -6,9 +6,6 @@
   <a href="https://github.com/qualifio/kibana-prometheus-exporter/actions/workflows/codeql-analysis.yml">
     <img src="https://github.com/qualifio/kibana-prometheus-exporter/actions/workflows/codeql-analysis.yml/badge.svg" alt="CodeQL Repo Badge" />
   </a>
-  <a href="https://github.com/qualifio/kibana-prometheus-exporter/actions/workflows/codecov.yml">
-    <img src="https://github.com/qualifio/kibana-prometheus-exporter/actions/workflows/codecov.yml/badge.svg" alt="CodeCov Repo Badge" />
-  </a>
   <a href="https://github.com/qualifio/kibana-prometheus-exporter/actions/workflows/release-wiki.yml">
     <img src="https://github.com/qualifio/kibana-prometheus-exporter/actions/workflows/release-wiki.yml/badge.svg?branch=main" alt="Release Wiki" />
   </a>
