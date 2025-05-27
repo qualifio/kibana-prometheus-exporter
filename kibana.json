@@ -1,6 +1,6 @@
 {
   "id": "kibanaPrometheusExporter",
-  "version": "8.18.1",
+  "version": "9.0.1",
   "owner": {
     "name": "https://github.com/qualifio"
   },
