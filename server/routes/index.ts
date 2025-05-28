@@ -8,6 +8,9 @@ export function defineRoutes(router: IRouter, statsURI: string) {
     {
       path: '/_prometheus/metrics',
       validate: false,
+      options: {
+        tags: ['access:public'],
+      },
     },
     async (_, request, response) => {
       let reqHeaders = {};
