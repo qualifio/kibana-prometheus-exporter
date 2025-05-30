@@ -9,7 +9,7 @@ export function defineRoutes(router: IRouter, statsURI: string) {
       path: '/_prometheus/metrics',
       validate: false,
       options: {
-        tags: ['access:public'],
+        access: 'public',
       },
     },
     async (_, request, response) => {
